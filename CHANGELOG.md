@@ -6,6 +6,70 @@ Newest first.
 
 ---
 
+## v6.19.0.14 — 2026-10-23
+
+**aleksrosme's morning levels on your chart, with alerts.**
+
+You asked for this on 10/23: "as part of the morning aleks check — can you mark those levels in
+my tradingview and set up price alerts in qqq?"
+
+**On the chart.** Each weekday the Bounce Journal reads his brief around 9:20 ET. The bridge
+picks it up within a minute, no click needed, and draws his calls in **pink**, labelled
+**"AR"**:
+
+* a single price is a solid line, e.g. **AR pivot 702**;
+* a range is a shaded band, e.g. **AR dip target 7580–7585**.
+
+Only the calls for the ticker on the chart are drawn, so QQQ levels show on QQQ and SPX levels
+on SPX. Each set is dated and disappears the next day, so yesterday's plan never sits on
+today's chart. If the brief is corrected after it lands, the chart picks that up within about
+5 minutes.
+
+**Alerts.** When price reaches an AR level, the bridge notifies you the same way it does for
+Nexus levels. These alerts run on their **own switch, even with the bell off**; the bell
+still controls Nexus-level alerts. Both switches are in Settings → Levels.
+
+The indicator also raises a TradingView alert when price crosses an AR level. That's the hook
+for phone alerts. It does nothing until a TradingView alert is set on the indicator, which is
+a separate step.
+
+This release changes the Pine indicator (Pine digit **.14**). Your chart offers the update once,
+and your tuned settings are kept. Needs one new permission: reading the Bounce Journal brief.
+
+Pinned by `test-ar-levels.mjs`.
+
+### Recent
+
+**v6.18.0.13** — New rule: any strike holding 10% or more of the board's GEX gets a dotted line
+
+**v6.17.6.13** — Auto-updates no longer leave a dead sync button on your chart
+
+**v6.17.5.13** — Pre-market strike columns sync now. The bridge no longer holds them back before the open
+
+**v6.17.4.13** — The sync tooltip now says when the strike columns are held before the open, instead of calling it a failure
+
+[Full version history →](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/CHANGELOG.md)
+
+---
+
+## Assets — what clicking each one actually does
+
+**`0-COPY-THIS-pine-script-for-tradingview.pine`** — the indicator that draws the columns.
+**You normally never need this file** — the extension installs and updates this script for you on your first sync. It's here as the fallback for when that can't run, and as the readable copy of what's on your chart. Clicking **downloads a text file and installs nothing**; to paste it in by hand, the "Open the script" link above is easier.
+
+**`1-FIREFOX-SETUP-…​.xpi`** — the Firefox add-on. Same file as the Install button above; clicking it in Firefox installs it. In Chrome it just downloads something useless.
+
+**`2-CHROME-SETUP-…​.zip`** — the Chrome extension as a file, for anyone who can't use the Web Store.
+Clicking **downloads a zip and installs nothing.** Chrome can't install an extension from a file. Unzip it → `chrome://extensions` → turn on **Developer mode** (top right) → **Load unpacked** → select the unzipped **`nexus-tradingview-bridge` folder** (the one with `manifest.json` directly inside — Chrome loads the folder, not the zip). Installed this way it will **not** auto-update.
+
+**`3.0-GUIDE-chrome.txt` · `3.1-GUIDE-firefox.txt` · `3.2-GUIDE-pine.md`** — reading, not installing. The long-form walkthroughs if the steps above aren't enough. Readable in your browser: [Chrome](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-chrome-install.txt) · [Firefox](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-firefox-install.txt) · [Pine](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-pine-indicator-setup.md)
+
+*Ignore "Source code (zip/tar.gz)" — GitHub generates those automatically and they aren't the extension.*
+
+---
+
+> **On version currency:** Firefox and the zip above are always this build. **Chrome's Web Store copy can be up to ~24 hours behind** — Google reviews every submission and locks the listing while one is pending, so Store releases land in batches. If you need today's code on Chrome right now, use the `2-CHROME-SETUP` zip and the manual steps above instead of the Store link.
+
 ## v6.18.0.13 — 2026-10-16
 
 **New rule: any strike holding 10% or more of the board's GEX gets a dotted line.**
