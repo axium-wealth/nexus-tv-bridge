@@ -6,6 +6,59 @@ Newest first.
 
 ---
 
+## v6.19.4.14 — 2026-10-26
+
+**The indicator move can no longer leave your chart without Strike Metrics.**
+
+On 10/23 a Pine update removed the old *Nexus Strike Metrics* from your chart, then couldn't
+add the new one back. The update had closed the Pine editor just before the move, and
+re-adding needs the editor's **Add to chart** button. A page reload restored the old
+indicator, because the layout hadn't been saved.
+
+**Now, before removing anything, the move:**
+
+1. opens the Pine editor,
+2. checks the editor is on *Nexus Strike Metrics*,
+3. checks the **Add to chart** button is there.
+
+If any of those fails, it stops and says why, and nothing is removed. If TradingView ignores
+the Add click, it retries with a full mouse press. Your settings are still read beforehand
+and written back afterwards.
+
+No Pine change (still .14). Pinned by `test-installer-stale.mjs`.
+
+### Recent
+
+**v6.19.3.14** — Pine updates can now move your chart onto the new indicator, and the bridge's own data goes to R2
+
+**v6.19.2.14** — A Pine update can now finish moving your chart onto the new indicator
+
+**v6.19.1.14** — Pine updates now check that your chart actually moved to the new script
+
+**v6.19.0.14** — aleksrosme's morning levels on your chart, with alerts
+
+[Full version history →](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/CHANGELOG.md)
+
+---
+
+## Assets — what clicking each one actually does
+
+**`0-COPY-THIS-pine-script-for-tradingview.pine`** — the indicator that draws the columns.
+**You normally never need this file** — the extension installs and updates this script for you on your first sync. It's here as the fallback for when that can't run, and as the readable copy of what's on your chart. Clicking **downloads a text file and installs nothing**; to paste it in by hand, the "Open the script" link above is easier.
+
+**`1-FIREFOX-SETUP-…​.xpi`** — the Firefox add-on. Same file as the Install button above; clicking it in Firefox installs it. In Chrome it just downloads something useless.
+
+**`2-CHROME-SETUP-…​.zip`** — the Chrome extension as a file, for anyone who can't use the Web Store.
+Clicking **downloads a zip and installs nothing.** Chrome can't install an extension from a file. Unzip it → `chrome://extensions` → turn on **Developer mode** (top right) → **Load unpacked** → select the unzipped **`nexus-tradingview-bridge` folder** (the one with `manifest.json` directly inside — Chrome loads the folder, not the zip). Installed this way it will **not** auto-update.
+
+**`3.0-GUIDE-chrome.txt` · `3.1-GUIDE-firefox.txt` · `3.2-GUIDE-pine.md`** — reading, not installing. The long-form walkthroughs if the steps above aren't enough. Readable in your browser: [Chrome](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-chrome-install.txt) · [Firefox](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-firefox-install.txt) · [Pine](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-pine-indicator-setup.md)
+
+*Ignore "Source code (zip/tar.gz)" — GitHub generates those automatically and they aren't the extension.*
+
+---
+
+> **On version currency:** Firefox and the zip above are always this build. **Chrome's Web Store copy can be up to ~24 hours behind** — Google reviews every submission and locks the listing while one is pending, so Store releases land in batches. If you need today's code on Chrome right now, use the `2-CHROME-SETUP` zip and the manual steps above instead of the Store link.
+
 ## v6.19.3.14 — 2026-10-23
 
 **Pine updates can now move your chart onto the new indicator, and the bridge's own data goes to R2.**
