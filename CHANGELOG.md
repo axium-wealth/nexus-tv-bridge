@@ -6,6 +6,65 @@ Newest first.
 
 ---
 
+## v6.19.5.14 — 2026-10-27
+
+**A stale copy of the bridge can no longer damage your Pine script. This build also goes to the Chrome Web Store, so your PC catches up.**
+
+On 10/27 your PC's bridge, still on 6.17.3.13 from the Web Store, offered to "update" the
+Pine script. It pasted the old script on top of the current one, which doubled it to 1,445
+lines. Your Pine script lives on your TradingView account, so every machine sees the same
+one.
+
+**What changes:**
+
+* **Never downgrade.** If the script on your account is newer than the bridge on that
+  machine, the bridge leaves it alone and logs that it's out of date. It no longer offers
+  an "update" that would roll the script back.
+* **A doubled paste is caught before saving.** After pasting, the installer checks how
+  long the editor's contents are. If the paste landed on top of the old script instead of
+  replacing it, the installer undoes it and stops. Nothing is saved.
+* **Two fixes from the 10/26 indicator move.** The installer now answers TradingView's "Save
+  this script before adding?" itself. It also opens the indicator's settings with the gear
+  button when a double-click doesn't work.
+
+**Why the PC was two weeks behind:** releases since 6.17.3.13 went to Firefox and GitHub but
+were never submitted to the Chrome Web Store, and the PC runs the Store copy. From this
+release on, every release goes to the Store too.
+
+No Pine change (still .14). Pinned by `test-installer-stale.mjs`.
+
+### Recent
+
+**v6.19.4.14** — The indicator move can no longer leave your chart without Strike Metrics
+
+**v6.19.3.14** — Pine updates can now move your chart onto the new indicator, and the bridge's own data goes to R2
+
+**v6.19.2.14** — A Pine update can now finish moving your chart onto the new indicator
+
+**v6.19.1.14** — Pine updates now check that your chart actually moved to the new script
+
+[Full version history →](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/CHANGELOG.md)
+
+---
+
+## Assets — what clicking each one actually does
+
+**`0-COPY-THIS-pine-script-for-tradingview.pine`** — the indicator that draws the columns.
+**You normally never need this file** — the extension installs and updates this script for you on your first sync. It's here as the fallback for when that can't run, and as the readable copy of what's on your chart. Clicking **downloads a text file and installs nothing**; to paste it in by hand, the "Open the script" link above is easier.
+
+**`1-FIREFOX-SETUP-…​.xpi`** — the Firefox add-on. Same file as the Install button above; clicking it in Firefox installs it. In Chrome it just downloads something useless.
+
+**`2-CHROME-SETUP-…​.zip`** — the Chrome extension as a file, for anyone who can't use the Web Store.
+Clicking **downloads a zip and installs nothing.** Chrome can't install an extension from a file. Unzip it → `chrome://extensions` → turn on **Developer mode** (top right) → **Load unpacked** → select the unzipped **`nexus-tradingview-bridge` folder** (the one with `manifest.json` directly inside — Chrome loads the folder, not the zip). Installed this way it will **not** auto-update.
+
+**`3.0-GUIDE-chrome.txt` · `3.1-GUIDE-firefox.txt` · `3.2-GUIDE-pine.md`** — reading, not installing. The long-form walkthroughs if the steps above aren't enough. Readable in your browser: [Chrome](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-chrome-install.txt) · [Firefox](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-firefox-install.txt) · [Pine](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-pine-indicator-setup.md)
+
+*Ignore "Source code (zip/tar.gz)" — GitHub generates those automatically and they aren't the extension.*
+
+---
+
+> **On version currency:** Firefox and the zip above are always this build. **Chrome's Web Store copy can be up to ~24 hours behind** — Google reviews every submission and locks the listing while one is pending, so Store releases land in batches. If you need today's code on Chrome right now, use the `2-CHROME-SETUP` zip and the manual steps above instead of the Store link.
+
 ## v6.19.4.14 — 2026-10-26
 
 **The indicator move can no longer leave your chart without Strike Metrics.**
