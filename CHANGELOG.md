@@ -6,6 +6,60 @@ Newest first.
 
 ---
 
+## v6.19.8.14 — 2026-11-19
+
+**The bridge can no longer delete Nexus Futures, write into the wrong Pine script, or leave the "older version" editor on screen.**
+
+On 11/19, Nexus Futures V4.1 disappeared from the Claude Overlay layout between the 09:38 and 09:47 CT syncs. You re-added it through Nexus. The Pine editor also kept opening on an "Untitled script" showing "This is an older version of the script".
+
+**What was wrong:**
+
+* **Removing Strike Metrics could hit Nexus Futures.** Moving Strike Metrics to a new compile removes it and adds it back. If its own Remove button didn't take, the fallback pressed Delete. Delete removes whatever TradingView has selected, and every sync selects Nexus Futures when it opens Nexus Futures' settings. The check afterward only counted Strike Metrics, so losing Nexus Futures read as "nothing was removed".
+* **Updates could write into the wrong script.** The Pine editor reopens the last script you had open. This time that was an old "Untitled script" (version 47, Aug 17). The update clicked "revert to this version" on it, pasted the current code over it and saved. It never checked that this was the script on the chart.
+* **The editor stayed open on that script.** On page load the bridge opens the editor to check your script. When it found a different script, it stopped but left the panel open with the "older version" banner.
+
+**What changes:**
+
+* **No Delete key, ever.** Only Strike Metrics' own Remove button can remove anything. Every other indicator is counted before and after. If one goes missing, the bridge says so and tells you to press ⌘Z.
+* **Writes only go into the chart's script.** Updates and re-adds check that the editor is on Nexus Strike Metrics, the script the chart is running, with an "Update" button and not "Add". Otherwise they stop and change nothing. A fresh install never pastes over one of your own scripts or reverts someone else's old version.
+* **The editor closes when it's on the wrong script.** No more "older version" banner left on the chart.
+
+If an update stops with "the Pine editor opened on 'Untitled script'", open Nexus Strike Metrics in the Pine editor once. TradingView remembers it after that.
+
+No Pine change (still .14). Pinned by `test-wrong-script-guards.mjs`.
+
+### Recent
+
+**v6.19.7.14** — The "Update the Nexus indicator?" card stops appearing when nothing is wrong. Column settings reach the chart again when Chrome is translating TradingView
+
+**v6.19.6.14** — aleksrosme's levels now come off your chart at 16:00 ET. The previous day's set no longer shows before the next brief
+
+**v6.19.5.14** — A stale copy of the bridge can no longer damage your Pine script. This build also goes to the Chrome Web Store, so your PC catches up
+
+**v6.19.4.14** — The indicator move can no longer leave your chart without Strike Metrics
+
+[Full version history →](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/CHANGELOG.md)
+
+---
+
+## Assets — what clicking each one actually does
+
+**`0-COPY-THIS-pine-script-for-tradingview.pine`** — the indicator that draws the columns.
+**You normally never need this file** — the extension installs and updates this script for you on your first sync. It's here as the fallback for when that can't run, and as the readable copy of what's on your chart. Clicking **downloads a text file and installs nothing**; to paste it in by hand, the "Open the script" link above is easier.
+
+**`1-FIREFOX-SETUP-…​.xpi`** — the Firefox add-on. Same file as the Install button above; clicking it in Firefox installs it. In Chrome it just downloads something useless.
+
+**`2-CHROME-SETUP-…​.zip`** — the Chrome extension as a file, for anyone who can't use the Web Store.
+Clicking **downloads a zip and installs nothing.** Chrome can't install an extension from a file. Unzip it → `chrome://extensions` → turn on **Developer mode** (top right) → **Load unpacked** → select the unzipped **`nexus-tradingview-bridge` folder** (the one with `manifest.json` directly inside — Chrome loads the folder, not the zip). Installed this way it will **not** auto-update.
+
+**`3.0-GUIDE-chrome.txt` · `3.1-GUIDE-firefox.txt` · `3.2-GUIDE-pine.md`** — reading, not installing. The long-form walkthroughs if the steps above aren't enough. Readable in your browser: [Chrome](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-chrome-install.txt) · [Firefox](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-firefox-install.txt) · [Pine](https://github.com/axium-wealth/nexus-tv-bridge/blob/main/GUIDE-pine-indicator-setup.md)
+
+*Ignore "Source code (zip/tar.gz)" — GitHub generates those automatically and they aren't the extension.*
+
+---
+
+> **On version currency:** Firefox and the zip above are always this build. **Chrome's Web Store copy can be up to ~24 hours behind** — Google reviews every submission and locks the listing while one is pending, so Store releases land in batches. If you need today's code on Chrome right now, use the `2-CHROME-SETUP` zip and the manual steps above instead of the Store link.
+
 ## v6.19.7.14 — 2026-11-19
 
 **The "Update the Nexus indicator?" card stops appearing when nothing is wrong. Column settings reach the chart again when Chrome is translating TradingView.**
